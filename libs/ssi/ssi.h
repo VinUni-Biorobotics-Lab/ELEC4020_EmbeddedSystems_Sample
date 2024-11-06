@@ -11,10 +11,10 @@
 #include "inc/hw_memmap.h"
 #include <stdint.h>
 
-#define SSI0    SSI0_BASE
-#define SSI1    SSI1_BASE
-#define SSI2    SSI2_BASE
-#define SSI3    SSI3_BASE
+#define SSI0    0
+#define SSI1    1
+#define SSI2    2
+#define SSI3    3
 
 // Master mode only
 void SSIInit(uint8_t ui8Id);
