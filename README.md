@@ -60,8 +60,11 @@ This repository contains middle-layer libraries for common peripherals and modul
      - [OLEDDisplayBitmap](#10-oleddisplaybitmap)
      - [Example](#example-5)
 4. [Utilility](#utilility)
-  - [Scheduler](#scheduler)
-  - [FSM](#finite-state-machine-fsm)
+   - [Scheduler](#scheduler)
+   - [FSM](#finite-state-machine-fsm)
+   - [PID](#pid)
+   - [Kalman filter](#kalman-filter)
+   - [Complementary filter](#complementary-filter)
 5. [Contribution](#contribution)
 
 
@@ -867,6 +870,15 @@ These utility libraries provide additional support for project development.
 Comming soon.
 
 ### Finite-state machine (FSM)
+Comming soon.
+
+### PID
+Comming soon.
+
+### Kalman filter
+Comming soon.
+
+### Complementary filter
 Comming soon.
 
 ## Contribution
