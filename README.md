@@ -59,6 +59,10 @@ This repository contains middle-layer libraries for common peripherals and modul
      - [OLEDSendStrXY](#9-oledsendstrxy)
      - [OLEDDisplayBitmap](#10-oleddisplaybitmap)
      - [Example](#example-5)
+   - [Joystick](#joystick)
+     - [Example](#example-6)
+   - [MPU6050 IMU](#mpu6050-imu)
+   - [RTC 1307](#rtc-ds1307-real-time-clock)
 4. [Utilility](#utilility)
    - [Scheduler](#scheduler)
    - [FSM](#finite-state-machine-fsm)
@@ -837,6 +841,8 @@ void OLEDDisplayBitmap(const uint8_t *bitmap);
 ---
 
 #### Example
+This example demonstrates initializing the OLED, loading a bitmap. These functions provide an easy interface to control an I2C-connected OLED display.
+
 ```c
 #include <stdint.h>
 #include <stdbool.h>
@@ -861,7 +867,51 @@ void main() {
 }
 ```
 
-This example demonstrates initializing the OLED, displaying text, setting individual pixels, and loading a bitmap. These functions provide an easy interface to control an I2C-connected OLED display.
+
+### Joystick
+#### **Hardware Connections**
+- **GND** → GND
+- **+5V** → 3.3V
+- **VRX** → PD0
+- **VRY** → PD1
+
+<img src="docs/joystick.jpg" height="250">
+
+#### Example
+```c
+#include <stdint.h>
+#include <stdbool.h>
+#include "driverlib/sysctl.h"
+#include "libs/adc/adc.h"
+
+uint32_t gui32Buffer[8];
+
+void ADCCallback(uint32_t * ui32Buffer) {
+    uint8_t ui32Idx = 0;
+    for(ui32Idx = 0; ui32Idx < 8; ui32Idx++) {
+        gui32Buffer[ui32Idx] = ui32Buffer[ui32Idx];
+    }
+}
+
+void main() {
+    SysCtlClockSet(SYSCTL_SYSDIV_2_5|SYSCTL_USE_PLL|SYSCTL_XTAL_16MHZ|SYSCTL_OSC_MAIN); // 80 MHz
+    
+    uint8_t ui8Pins[] = {AIN7, AIN6};       // Define ADC pins
+    ADCInit(ui8Pins, 2);                    // Initialize ADC on these pins
+    ADCRegisterCallback(&ADCCallback);      // Register the callback
+
+    while (1) {
+        ADCTriggerConversion();              // Trigger conversion
+        // Other code
+    }
+}
+```
+
+### MPU6050 (IMU)
+Comming soon.
+
+### RTC DS1307 (Real-time clock)
+Comming soon.
 
 ## Utilility
 These utility libraries provide additional support for project development.
