@@ -9,6 +9,62 @@ This repository contains middle-layer libraries for common peripherals and modul
 - Library: TivaWare C Series 1.1
 - Kit: Tiva C Series TM4C123G LaunchPad
 
+## Table of content
+1. [Introduction](#introduction)
+2. [Requirement](#requirement)
+3. [Peripheral Libraries](#peripheral-libraries)
+   - [ADC Library](#adc)
+     - [ADCSingleRead](#1-adcsingleread)
+     - [ADCInit](#2-adcinit)
+     - [ADCRegisterCallback](#3-adcregistercallback)
+     - [ADCTriggerConversion](#4-ADCTriggerConversion)
+     - [Example](#example)
+   - [I2C Library](#i2c)
+     - [I2CInit](#1-i2cinit)
+     - [I2CWriteSingleByte](#2-i2cwritesinglebyte)
+     - [I2CWriteMultiByte](#3-i2cwritemultibyte)
+     - [I2CReadSingleByte](#4-i2creadsinglebyte)
+     - [I2CReadMultiByte](#5-i2creadmultibyte)
+     - [Example](#example-1)
+   - [SPI (SSI) Library](#ssi)
+     - [SSIInit](#1-ssiinit)
+     - [SSIWriteSingleByte](#2-ssiwritesinglebyte)
+     - [SSIWriteMultiByte](#3-ssiwritemultibyte)
+     - [SSIReadSingleByte](#4-ssireadsinglebyte)
+     - [SSIReadMultiByte](#5-ssireadmultibyte)
+     - [SSIReadWriteSingleByte](#6-ssireadwritesinglebyte)
+     - [SSIReadWriteMultiByte](#7-ssireadwritemultibyte)
+     - [Example](#example-2)
+   - [UART Library](#uart)
+     - [UARTInit](#1-uartinit)
+     - [UARTRead](#2-uartread)
+     - [UARTWrite](#3-uartwrite)
+     - [UARTQueryData](#4-uartquerydata)
+     - [UARTWriteCMD](#5-uartwritecmd)
+     - [Example](#example-3)
+4. [Modules](#module-sample)
+   - [DC Motor](#dc-motor)
+     - [MotorsInit](#1-motorsinit)
+     - [MotorsSetSpeed](#2-motorssetspeed)
+     - [Example](#example-4)
+   - [OLED SSD1306](#oled-ssd1306)
+     - [OLEDInit](#1-oledinit)
+     - [OLEDDisplayOn](#2-oleddisplayon)
+     - [OLEDDisplayOff](#3-oleddisplayoff)
+     - [OLEDResetDisplay](#4-oledresetdisplay)
+     - [OLEDClearDisplay](#5-oledcleardisplay)
+     - [OLEDSetXY](#6-oledsetxy)
+     - [OLEDSetPixelXY](#7-oledsetpixelxy)
+     - [OLEDSendCharXY](#8-oledsendcharxy)
+     - [OLEDSendStrXY](#9-oledsendstrxy)
+     - [OLEDDisplayBitmap](#10-oleddisplaybitmap)
+     - [Example](#example-5)
+4. [Utilility](#utilility)
+  - [Scheduler](#scheduler)
+  - [FSM](#finite-state-machine-fsm)
+5. [Contribution](#contribution)
+
+
 ## Peripheral libraries
 These libraries offer a foundation for working with key peripherals. 
 
@@ -72,7 +128,7 @@ void ADCTriggerConversion();
   ADCTriggerConversion(); // Start ADC conversion on initialized channels
   ```
 
-### Example Usage
+#### Example
 This example sets up the ADC for three channels, registers a callback function for handling the ADC results, and triggers the conversion in an infinite loop.
 ```c
 #include <stdint.h>
@@ -106,7 +162,7 @@ void main() {
 ### I2C
 This library provides functions for initializing and using the I2C modules on the Tiva C TM4C123G microcontroller. It supports both single-byte and multi-byte read and write operations for I2C devices.
 
-### **1. I2CInit**
+#### **1. I2CInit**
 ```c
 void I2CInit(uint32_t i2c);
 ```
@@ -121,7 +177,7 @@ void I2CInit(uint32_t i2c);
 
 ---
 
-### **2. I2CWriteSingleByte**
+#### **2. I2CWriteSingleByte**
 ```c
 void I2CWriteSingleByte(uint32_t ui32Id, uint8_t ui8Addr, uint8_t ui8RegAddr, uint8_t ui8Data);
 ```
@@ -139,7 +195,7 @@ void I2CWriteSingleByte(uint32_t ui32Id, uint8_t ui8Addr, uint8_t ui8RegAddr, ui
 
 ---
 
-### **3. I2CWriteMultiByte**
+#### **3. I2CWriteMultiByte**
 ```c
 void I2CWriteMultiByte(uint32_t ui32Id, uint8_t ui8Addr, uint8_t ui8RegAddr, uint8_t* pui8Data, uint8_t ui8Length);
 ```
@@ -159,7 +215,7 @@ void I2CWriteMultiByte(uint32_t ui32Id, uint8_t ui8Addr, uint8_t ui8RegAddr, uin
 
 ---
 
-### **4. I2CReadSingleByte**
+#### **4. I2CReadSingleByte**
 ```c
 uint8_t I2CReadSingleByte(uint32_t ui32Id, uint8_t ui8Addr, uint8_t ui8RegAddr);
 ```
@@ -178,7 +234,7 @@ uint8_t I2CReadSingleByte(uint32_t ui32Id, uint8_t ui8Addr, uint8_t ui8RegAddr);
 
 ---
 
-### **5. I2CReadMultiByte**
+#### **5. I2CReadMultiByte**
 ```c
 void I2CReadMultiByte(uint32_t ui32Id, uint8_t ui8Addr, uint8_t ui8RegAddr, uint8_t* pui8Data, uint8_t ui8Length);
 ```
@@ -198,7 +254,7 @@ void I2CReadMultiByte(uint32_t ui32Id, uint8_t ui8Addr, uint8_t ui8RegAddr, uint
 
 ---
 
-### Example
+#### Example
 This example demonstrates initializing the I2C module, writing and reading single bytes, and handling multi-byte data transfers with an I2C device.
 ```c
 #include <stdint.h>
@@ -233,7 +289,7 @@ This library allows communication with devices over SSI (SPI), configured in mas
 
 ---
 
-### **1. SSIInit**
+#### **1. SSIInit**
 ```c
 void SSIInit(uint8_t ui8Id);
 ```
@@ -248,7 +304,7 @@ void SSIInit(uint8_t ui8Id);
 
 ---
 
-### **2. SSIWriteSingleByte**
+#### **2. SSIWriteSingleByte**
 ```c
 void SSIWriteSingleByte(uint8_t ui8Id, uint8_t ui8RegAddr, uint8_t ui8Data);
 ```
@@ -265,7 +321,7 @@ void SSIWriteSingleByte(uint8_t ui8Id, uint8_t ui8RegAddr, uint8_t ui8Data);
 
 ---
 
-### **3. SSIWriteMultiByte**
+#### **3. SSIWriteMultiByte**
 ```c
 void SSIWriteMultiByte(uint8_t ui8Id, uint8_t ui8RegAddr, uint8_t* pui8Data, uint8_t ui8Length);
 ```
@@ -284,7 +340,7 @@ void SSIWriteMultiByte(uint8_t ui8Id, uint8_t ui8RegAddr, uint8_t* pui8Data, uin
 
 ---
 
-### **4. SSIReadSingleByte**
+#### **4. SSIReadSingleByte**
 ```c
 uint16_t SSIReadSingleByte(uint8_t ui8Id, uint8_t ui8RegAddr);
 ```
@@ -302,7 +358,7 @@ uint16_t SSIReadSingleByte(uint8_t ui8Id, uint8_t ui8RegAddr);
 
 ---
 
-### **5. SSIReadMultiByte**
+#### **5. SSIReadMultiByte**
 ```c
 void SSIReadMultiByte(uint8_t ui8Id, uint8_t ui8RegAddr, uint8_t* pui8Data, uint8_t ui8Length);
 ```
@@ -321,7 +377,7 @@ void SSIReadMultiByte(uint8_t ui8Id, uint8_t ui8RegAddr, uint8_t* pui8Data, uint
 
 ---
 
-### **6. SSIReadWriteSingleByte**
+#### **6. SSIReadWriteSingleByte**
 ```c
 uint16_t SSIReadWriteSingleByte(uint8_t ui8Id, uint8_t ui8Data);
 ```
@@ -339,7 +395,7 @@ uint16_t SSIReadWriteSingleByte(uint8_t ui8Id, uint8_t ui8Data);
 
 ---
 
-### **7. SSIReadWriteMultiByte**
+#### **7. SSIReadWriteMultiByte**
 ```c
 void SSIReadWriteMultiByte(uint8_t ui8Id, uint8_t* pui8ReadData, uint8_t* pui8WriteData, uint8_t ui8Length);
 ```
@@ -359,7 +415,7 @@ void SSIReadWriteMultiByte(uint8_t ui8Id, uint8_t* pui8ReadData, uint8_t* pui8Wr
 
 ---
 
-### Example
+#### Example
 This example demonstrates initialization, single-byte and multi-byte read/write operations, as well as full-duplex data exchange on an SSI device.
 ```c
 #include <stdint.h>
@@ -399,7 +455,7 @@ This library provides functions to initialize and use the UART interface on the 
 
 ---
 
-### **1. UARTInit**
+#### **1. UARTInit**
 ```c
 void UARTInit();
 ```
@@ -413,7 +469,7 @@ void UARTInit();
 
 ---
 
-### **2. UARTRead**
+#### **2. UARTRead**
 ```c
 void UARTRead(uint8_t * buf, uint16_t len);
 ```
@@ -430,7 +486,7 @@ void UARTRead(uint8_t * buf, uint16_t len);
 
 ---
 
-### **3. UARTWrite**
+#### **3. UARTWrite**
 ```c
 void UARTWrite(uint8_t* cBuff, uint16_t ui16Len);
 ```
@@ -447,7 +503,7 @@ void UARTWrite(uint8_t* cBuff, uint16_t ui16Len);
 
 ---
 
-### **4. UARTQueryData**
+#### **4. UARTQueryData**
 ```c
 uint16_t UARTQueryData();
 ```
@@ -462,7 +518,7 @@ uint16_t UARTQueryData();
 
 ---
 
-### **5. UARTWriteCMD**
+#### **5. UARTWriteCMD**
 ```c
 void UARTWriteCMD(char* cBuff);
 ```
@@ -477,7 +533,7 @@ void UARTWriteCMD(char* cBuff);
 
 ---
 
-### Example
+#### Example
 This example demonstrates initializing the UART, writing and reading data, querying available data, and sending a command string over UART. The UART module used depends on whether the `DEBUG` flag is defined.
 ```c
 #include <stdint.h>
@@ -515,7 +571,7 @@ This library facilitates control of multiple motors using PWM (Pulse Width Modul
 
 ---
 
-### **1. MotorsInit**
+#### **1. MotorsInit**
 ```c
 void MotorsInit(pwm_mod_t * pConfig, uint8_t ui8NoMotors);
 ```
@@ -532,7 +588,7 @@ void MotorsInit(pwm_mod_t * pConfig, uint8_t ui8NoMotors);
 
 ---
 
-### **2. MotorsSetSpeed**
+#### **2. MotorsSetSpeed**
 ```c
 void MotorsSetSpeed(uint8_t ui8Id, uint8_t ui8Speed);
 ```
@@ -548,8 +604,8 @@ void MotorsSetSpeed(uint8_t ui8Id, uint8_t ui8Speed);
 
 ---
 
-### Example
-#### Components
+#### Example
+##### Components
 <img src="docs/motor-l298n.webp" height="250">
 
 This image is borrowed from [lastminuteengineers.com](https://lastminuteengineers.com/l298n-dc-stepper-driver-arduino-tutorial/)
@@ -571,7 +627,7 @@ IN1         --->    PF2 (Tiva C)
 IN2         --->    PF3 (Tiva C)
 ```
 
-#### Code
+##### Code
 ```c
 #include <stdint.h>
 #include <stdbool.h>
@@ -625,7 +681,7 @@ This library allows control over an OLED display (SSD1306 128x64) using I2C comm
 
 ---
 
-### **1. OLEDInit**
+#### **1. OLEDInit**
 ```c
 void OLEDInit();
 ```
@@ -639,7 +695,7 @@ void OLEDInit();
 
 ---
 
-### **2. OLEDDisplayOn**
+#### **2. OLEDDisplayOn**
 ```c
 void OLEDDisplayOn();
 ```
@@ -653,7 +709,7 @@ void OLEDDisplayOn();
 
 ---
 
-### **3. OLEDDisplayOff**
+#### **3. OLEDDisplayOff**
 ```c
 void OLEDDisplayOff();
 ```
@@ -667,7 +723,7 @@ void OLEDDisplayOff();
 
 ---
 
-### **4. OLEDResetDisplay**
+#### **4. OLEDResetDisplay**
 ```c
 void OLEDResetDisplay();
 ```
@@ -681,7 +737,7 @@ void OLEDResetDisplay();
 
 ---
 
-### **5. OLEDClearDisplay**
+#### **5. OLEDClearDisplay**
 ```c
 void OLEDClearDisplay();
 ```
@@ -695,7 +751,7 @@ void OLEDClearDisplay();
 
 ---
 
-### **6. OLEDSetXY**
+#### **6. OLEDSetXY**
 ```c
 void OLEDSetXY(uint8_t ui8Row, uint8_t ui8Col);
 ```
@@ -711,7 +767,7 @@ void OLEDSetXY(uint8_t ui8Row, uint8_t ui8Col);
 
 ---
 
-### **7. OLEDSetPixelXY**
+#### **7. OLEDSetPixelXY**
 ```c
 void OLEDSetPixelXY(uint8_t ui8X, uint8_t ui8Y);
 ```
@@ -727,7 +783,7 @@ void OLEDSetPixelXY(uint8_t ui8X, uint8_t ui8Y);
 
 ---
 
-### **8. OLEDSendCharXY**
+#### **8. OLEDSendCharXY**
 ```c
 void OLEDSendCharXY(char cData, uint8_t ui8X, uint8_t ui8Y);
 ```
@@ -744,7 +800,7 @@ void OLEDSendCharXY(char cData, uint8_t ui8X, uint8_t ui8Y);
 
 ---
 
-### **9. OLEDSendStrXY**
+#### **9. OLEDSendStrXY**
 ```c
 void OLEDSendStrXY(char *cString, uint8_t ui8X, uint8_t ui8Y);
 ```
@@ -761,7 +817,7 @@ void OLEDSendStrXY(char *cString, uint8_t ui8X, uint8_t ui8Y);
 
 ---
 
-### **10. OLEDDisplayBitmap**
+#### **10. OLEDDisplayBitmap**
 ```c
 void OLEDDisplayBitmap(const uint8_t *bitmap);
 ```
@@ -777,7 +833,7 @@ void OLEDDisplayBitmap(const uint8_t *bitmap);
 
 ---
 
-### Example
+#### Example
 ```c
 #include <stdint.h>
 #include <stdbool.h>
