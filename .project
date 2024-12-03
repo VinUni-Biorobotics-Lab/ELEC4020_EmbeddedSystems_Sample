@@ -34,7 +34,7 @@
 	<variableList>
 		<variable>
 			<name>TIVAWARE_INSTALL</name>
-			<value>$%7BTI_PRODUCTS_DIR__TIREX%7D/TivaWare_C_Series_1.1</value>
+			<value>$%7BTI_PRODUCTS_DIR__TIREX%7D/TivaWare_C_Series-1.1</value>
 		</variable>
 	</variableList>
 </projectDescription>
