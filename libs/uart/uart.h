@@ -19,7 +19,7 @@
 #include "driverlib/sysctl.h"
 #include "driverlib/uart.h"
 
-#define DEBUG
+//#define DEBUG
 
 #ifdef DEBUG
 

@@ -10,6 +10,7 @@
 #include "libs/adc/adc.h"
 #include "libs/uart/uart.h"
 #include "modules/dc_motor/motor.h"
+#include "modules/lcd1602_i2c/lcd1602_i2c.h"
 
 uint32_t gui32Buffer[8];
 char cBuffer[50];
@@ -25,25 +26,31 @@ void ADCCallback(uint32_t * ui32Buffer) {
  * main.c
  */
 
-
 void main() {
-    SysCtlClockSet(SYSCTL_SYSDIV_2_5|SYSCTL_USE_PLL|SYSCTL_XTAL_16MHZ|SYSCTL_OSC_MAIN); // 80 MHz
+    SysCtlClockSet(SYSCTL_SYSDIV_4|SYSCTL_USE_PLL|SYSCTL_XTAL_16MHZ|SYSCTL_OSC_MAIN); // 80 MHz
 
-    /* I2C Demo */
-    OLEDInit();
-    OLEDClearDisplay();
-    OLEDDisplayBitmap(aui8Prof);
+//    /* I2C Demo */
+//    OLEDInit();
+//    OLEDClearDisplay();
+//    OLEDDisplayBitmap(aui8Prof);
 
     /* ADC Demo */
 //    gui32Buffer[0] = ADCSingleRead(AIN7);
 //    gui32Buffer[1] = ADCSingleRead(AIN6);
 
-    uint8_t ui8Pins[] = {AIN7, AIN6};
-    ADCInit(ui8Pins, 2);
-    ADCRegisterCallback(&ADCCallback);
+//    uint8_t ui8Pins[] = {AIN7, AIN6};
+//    ADCInit(ui8Pins, 2);
+//    ADCRegisterCallback(&ADCCallback);
 
     /* UART Demo */
-    UARTInit();
+//    UARTInit();
+
+    /* LCD1602 - I2C */
+    LCD1602Init();
+    LCD1602Goto(0, 1);
+    LCD1602SetString("ELEC4020");
+    LCD1602Goto(1, 1);
+    LCD1602SetString("minht57");
 
 //    /* PWM Demo */
 //    pwm_mod_t motorList = PWM_MOD1_GEN3;
@@ -54,7 +61,7 @@ void main() {
 //    uint32_t ui32Position = 0;
 
     // Enable processor interrupt
-    IntMasterEnable();
+//    IntMasterEnable();
 
     while(1) {
 //        MotorsSetSpeed(0, ui8Speed);
@@ -75,8 +82,6 @@ void main() {
 //            ui8Speed -= 5;
 //            ui8Speed = ui8Speed == 0 ? 1 : ui8Speed;
 //        }
-
-        SysCtlDelay(SysCtlClockGet()/30);
     }
 }
 

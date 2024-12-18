@@ -31,7 +31,7 @@ void GPIOPortFIntHandler() {
     uint32_t mask = GPIOIntStatus(GPIO_PORTF_BASE, GPIO_INT_PIN_0 | GPIO_INT_PIN_4);
     // Clear the interrupt
     GPIOIntClear(GPIO_PORTF_BASE, mask);
-    SysCtlDelay(SysCtlClockGet() / 300);
+    SysCtlDelay(SysCtlClockGet() / 1000);
 
     // SW2 - decrease
     if((mask & GPIO_INT_PIN_0) && (GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_0) == 0)) {
