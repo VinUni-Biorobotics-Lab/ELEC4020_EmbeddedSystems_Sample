@@ -908,7 +908,7 @@ void main() {
 ```
 
 ### MPU6050 (IMU)
-Comming soon.
+Please refer to [this repository](https://github.com/minht57/TIVA_MPU6050).
 
 ### RTC DS1307 (Real-time clock)
 Comming soon.
@@ -917,19 +917,22 @@ Comming soon.
 These utility libraries provide additional support for project development.
 
 ### Scheduler
-Comming soon.
+Please refer to [this repository](https://github.com/payitforward/RaiseYourARM2015/tree/master/Timer). Add the `Timer` folder in your project. Use the `TIMER_RegisterEvent` and `TIMER_UnregisterEvent` functions to register and deregister events.
 
 ### Finite-state machine (FSM)
-Comming soon.
+Please refer to [this code snippet](https://github.com/payitforward/RaiseYourARM2015/blob/master/main.c#L21-L137) to see how a `switch` statement can be used to manage system states. 
 
 ### PID
-Comming soon.
+Please refer to [this repository](https://github.com/payitforward/RaiseYourARM2015/blob/master/WallFollow). Download `PID.c` and `PID.h` files and copy them into your project.
 
 ### Kalman filter
-Comming soon.
+Please refer to [this repository](https://github.com/minht57/TIVA_MPU6050). Add the `MPU6050` folder in your project and call the `MPU6050_Kalman_Angle` function. It provides support for estimating roll and pitch angles using Euler angles.
 
 ### Complementary filter
-Comming soon.
+Please refer to [this repository](https://github.com/minht57/TIVA_MPU6050). Add the `MPU6050` folder in your project and call the `MPU6050_Complimentary_Angle` function. It provides support for estimating roll and pitch angles using Euler angles.
+
+### Encoder using Quadrature Encoder Interface (QEI)
+Please refer to [this repository](https://github.com/payitforward/RaiseYourARM2015/tree/master/QEI). Add the `QEI` folder in your project.
 
 ## Contribution
 We welcome contributions to this project! If you find issues or have improvements to suggest, feel free to create a Pull Requests or reach out to the teaching team.

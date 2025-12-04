@@ -22,7 +22,7 @@ uint8_t * gaImages[] = {aui8Class, aui8VinUni, aui8Prof, aui8BuildingI};
 
 void ADCCallback(uint32_t * ui32Buffer) {
     uint8_t ui32Idx = 0;
-    for(ui32Idx = 0; ui32Idx < 2; ui32Idx++) {
+    for(ui32Idx = 0; ui32Idx < 1; ui32Idx++) {
         gui32Buffer[ui32Idx] = ui32Buffer[ui32Idx];
     }
 }
@@ -100,8 +100,8 @@ void main() {
 //    gui32Buffer[0] = ADCSingleRead(AIN7);
 //    gui32Buffer[1] = ADCSingleRead(AIN6);
 
-    uint8_t ui8Pins[] = {AIN1, AIN0};
-    ADCInit(ui8Pins, 2);
+    uint8_t ui8Pins[] = {AIN0};
+    ADCInit(ui8Pins, 1);
     ADCRegisterCallback(&ADCCallback);
 
     /* UART Demo */
@@ -114,13 +114,13 @@ void main() {
         if(gui8Mode == 1) {
             ADCTriggerConversion();
             SysCtlDelay(SysCtlClockGet()/100);
-            uint16_t noBytes = sprintf(cBuffer,"X: %4d", gui32Buffer[0]);
+            uint16_t noBytes = sprintf(cBuffer,"ADC: %4d", gui32Buffer[0]);
 //            OLEDClearDisplay();
             OLEDSendStrXY(cBuffer, 2, 2);
-            noBytes = sprintf(cBuffer,"Y: %4d", gui32Buffer[1]);
+            noBytes = sprintf(cBuffer,"V: %.2f V", (float)(gui32Buffer[0]) / 1241);
             OLEDSendStrXY(cBuffer, 4, 2);
-            noBytes = sprintf(cBuffer,"Pressed: %d", (bool)!GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_1));
-            OLEDSendStrXY(cBuffer, 6, 2);
+//            noBytes = sprintf(cBuffer,"Pressed: %d", (bool)!GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_1));
+//            OLEDSendStrXY(cBuffer, 6, 2);
 
             SysCtlDelay(SysCtlClockGet()/30);
         }
